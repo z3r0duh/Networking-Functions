@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Networking Concepts Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .wrong {
+            color: red;
+        }
+        .correct {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>Networking Concepts Quiz</h1>
+    
+    <form id="quizForm">
+        <div class="question">
+            <p>1. What does a Content Delivery Network (CDN) do?</p>
+            <input type="radio" name="q1" value="correct"> Caches and delivers data efficiently to users<br>
+            <input type="radio" name="q1" value="wrong"> Encrypts network traffic for secure communication<br>
+            <input type="radio" name="q1" value="wrong"> Provides real-time video streaming to users<br>
+        </div>
+
+        <div class="question">
+            <p>2. What is the main purpose of a VPN concentrator?</p>
+            <input type="radio" name="q2" value="wrong"> Prioritizes applications on the network<br>
+            <input type="radio" name="q2" value="correct"> Handles secure VPN connections and encrypts/decrypts data<br>
+            <input type="radio" name="q2" value="wrong"> Redirects traffic to the fastest network path<br>
+        </div>
+
+        <div class="question">
+            <p>3. How does a Time to Live (TTL) field in an IP packet help prevent routing loops?</p>
+            <input type="radio" name="q3" value="correct"> TTL limits the number of hops a packet can take before being discarded<br>
+            <input type="radio" name="q3" value="wrong"> TTL increases the number of hops for faster delivery<br>
+            <input type="radio" name="q3" value="wrong"> TTL prevents packets from being cached on CDN servers<br>
+        </div>
+
+        <div class="question">
+            <p>4. Which protocol configuration helps prioritize real-time traffic like video over file transfers?</p>
+            <input type="radio" name="q4" value="wrong"> VPN<br>
+            <input type="radio" name="q4" value="correct"> QoS (Quality of Service)<br>
+            <input type="radio" name="q4" value="wrong"> TTL<br>
+        </div>
+
+        <button type="button" class="submit-btn" onclick="submitQuiz()">Submit</button>
+    </form>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    function submitQuiz() {
+        var form = document.getElementById('quizForm');
+        var result = document.getElementById('result');
+        var score = 0;
+        var feedback = '';
+        
+        var answers = {
+            q1: 'correct',
+            q2: 'correct',
+            q3: 'correct',
+            q4: 'correct'
+        };
+
+        for (var i = 1; i <= 4; i++) {
+            var question = form['q' + i];
+            var selected = document.querySelector('input[name="q' + i + '"]:checked');
+
+            if (selected) {
+                if (selected.value === answers['q' + i]) {
+                    score++;
+                    feedback += '<p class="correct">Question ' + i + ': Correct!</p>';
+                } else {
+                    feedback += '<p class="wrong">Question ' + i + ': Wrong!</p>';
+                }
+            } else {
+                feedback += '<p class="wrong">Question ' + i + ': You did not answer this question.</p>';
+            }
+        }
+
+        result.innerHTML = 'Your score is: ' + score + '/4<br>' + feedback;
+    }
+</script>
+
+</body>
+</html>
